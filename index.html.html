@@ -1,296 +1,1455 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-    <meta http-equiv="Pragma" content="no-cache" />
-    <meta http-equiv="Expires" content="0" />
-    <title>Cookie check</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <style>
-      :root {
-        color-scheme: light dark;
-      }
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plataforma Integral NOM-035-STPS-2018 | Diagnóstico y Cumplimiento</title>
+  <meta name="description" content="Identificación de factores de riesgo psicosocial, evaluación de entorno organizacional, buzón de quejas y reportes normativos oficiales." />
+  
+  <!-- Open Graph / Redes Sociales y Previsualización de Correo -->
+  <meta property="og:title" content="Plataforma Integral NOM-035-STPS-2018 | Diagnóstico y Cumplimiento" />
+  <meta property="og:description" content="Identificación de factores de riesgo psicosocial, evaluación de entorno organizacional, buzón de quejas y reportes normativos oficiales." />
+  <meta property="og:image" content="https://i.postimg.cc/SscBgrWC/Gemini-Generated-Image-khymg0khymg0khym.jpg" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="es_MX" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Plataforma Integral NOM-035-STPS-2018 | Diagnóstico y Cumplimiento" />
+  <meta name="twitter:description" content="Identificación de factores de riesgo psicosocial, evaluación de entorno organizacional, buzón de quejas y reportes normativos oficiales." />
+  <meta name="twitter:image" content="https://i.postimg.cc/SscBgrWC/Gemini-Generated-Image-khymg0khymg0khym.jpg" />
 
-      body {
-        font-family: 'Inter', Helvetica, Arial, sans-serif;
-        background: light-dark(#F8F8F7, #191919);
-        color: light-dark(#1f1f1f, #e3e3e3);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        box-sizing: border-box;
-        min-height: 100vh;
-        margin: 0;
-        padding: 20px;
-        text-align: center;
-      }
-
-      .container {
-        background: light-dark(#FFFFFF, #1F1F1F);
-        padding: 32px;
-        border-radius: 16px;
-        border: 1px solid light-dark(#E2E3E4, #3E3E3E);
-        max-width: min(80%, 500px);
-        width: 100%;
-        color: light-dark(#2B2D31, #D4D4D4);
-      }
-
-      h1 {
-        font-size: 20px;
-        font-weight: 500;
-        margin-top: 1rem;
-        margin-bottom: 1rem;
-        color: light-dark(#2B2D31, #D4D4D4);
-      }
-
-      p {
-        font-size: 14px;
-        color: light-dark(#2B2D31, #D4D4D4);
-        line-height: 21px;
-        margin: 0 0 1.5rem 0;
-      }
-
-      .icon {
-        margin-bottom: 1rem;
-        line-height: 0;
-      }
-
-      .button-container {
-        display: flex;
-        justify-content: flex-end;
-        gap: 10px;
-        margin-top: 2rem;
-      }
-
-      button {
-        background-color: light-dark(#fff, #323232);
-        color: light-dark(#2B2D31, #FCFCFC);
-        border: 1px solid light-dark(#E2E3E4, #3E3E3E);
-        border-radius: 12px;
-        padding: 8px 12px;
-        font-size: 14px;
-        line-height: 21px;
-        cursor: pointer;
-        transition: background-color 0.2s;
-        font-weight: 400;
-        font-family: 'Inter', Helvetica, Arial, sans-serif;
-        width: 100%;
-      }
-
-      button:hover {
-        background-color: light-dark(#EAEAEB, #424242);
-      }
-
-      .hidden {
-        display: none;
-      }
-
-      /* Loading Spinner Animation */
-      .spinner {
-        margin: 0 auto 1.5rem auto;
-        width: 40px;
-        height: 40px;
-        border: 4px solid light-dark(#f0f0f0, #262626);
-        border-top: 4px solid light-dark(#076eff, #87a9ff); /* Blue color */
-        border-radius: 50%;
-        animation: spin 1s linear infinite;
-      }
-
-      .logo {
-        border-radius: 10px;
-        display: block;
-        margin: 0 auto 2rem auto;
-      }
-
-      .logo.hidden {
-        display: none;
-      }
-
-      @keyframes spin {
-        0% {
-          transform: rotate(0deg);
-        }
-        100% {
-          transform: rotate(360deg);
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <img
-        class="logo"
-        src="https://www.gstatic.com/images/branding/productlogos/ai_studio/v1/web-512dp/logo_ai_studio_color_1x_web_512dp.png"
-        alt="AI Studio Logo"
-        width="256"
-        height="256"
-      />
-      <div class="spinner"></div>
-      <div id="error-ui" class="hidden">
-        <div class="icon">
-          <svg
-            version="1.1"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            width="48px"
-            height="48px"
-            fill="#D73A49"
-          >
-            <path
-              d="M12,2C6.486,2,2,6.486,2,12s4.486,10,10,10s10-4.486,10-10S17.514,2,12,2z M13,17h-2v-2h2V17z M13,13h-2V7h2V13z"
-            />
-          </svg>
-        </div>
-        <div id="stepOne" class="text-container">
-          <h1>Action required to load your app</h1>
-          <p>
-            It looks like your browser is blocking a required security cookie, which is common on
-            older versions of iOS and Safari.
-          </p>
-          <div class="button-container">
-            <button id="authInSeparateWindowButton" onclick="redirectToReturnUrl(true)">Authenticate in new window</button>
-          </div>
-        </div>
-        <div id="stepTwo" class="text-container hidden">
-          <h1>Action required to load your app</h1>
-          <p>
-            It looks like your browser is blocking a required security cookie, which is common on
-            older versions of iOS and Safari.
-          </p>
-          <div class="button-container">
-            <button id="interactButton" onclick="redirectToReturnUrl(false)">Close and continue</button>
-          </div>
-        </div>
-        <div id="stepThree" class="text-container hidden">
-          <h1>Almost there!</h1>
-          <p>
-            Grant permission for the required security cookie below.
-          </p>
-          <div class="button-container">
-            <button id="grantPermissionButton" onclick="grantStorageAccess()">Grant permission</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <script>
-      const AUTH_FLOW_TEST_COOKIE_NAME = '__SECURE-aistudio_auth_flow_may_set_cookies';
-      const COOKIE_VALUE = 'true';
-
-      function getCookie(name) {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-          let cookie = cookies[i].trim();
-          if (cookie.startsWith(name + '=')) {
-            return cookie.substring(name.length + 1);
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#ecfdf5',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
+              900: '#064e3b'
+            }
           }
         }
-        return null;
       }
+    }
+  </script>
 
-      function setAuthFlowTestCookie() {
-        // Set the cookie's TTL to 1 minute. This is a short lived cookie because it is only used
-        // when the user does not have an auth token or their auth token needs to be reset.
-        // Making this cookie too long-lived allows the user to get into a state where they can't
-        // mint a new auth token.
-        document.cookie = `${AUTH_FLOW_TEST_COOKIE_NAME}=${COOKIE_VALUE}; Path=/; Secure; SameSite=None; Domain=${window.location.hostname}; Partitioned; Max-Age=60;`;
+  <!-- React 18 & ReactDOM & Babel Standalone para ejecución en 1 solo archivo autónomo -->
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <style>
+    @media print {
+      .no-print, header, footer, .action-bar { display: none !important; }
+      body { background: white !important; color: black !important; padding: 0 !important; }
+      .print-full { width: 100% !important; border: none !important; box-shadow: none !important; margin: 0 !important; padding: 0 !important; }
+    }
+  </style>
+</head>
+<body class="bg-slate-100 text-slate-900 font-sans antialiased min-h-screen flex flex-col">
+  <div id="root" class="flex-1 flex flex-col"></div>
+
+  <script type="text/babel">
+    const { useState, useEffect, useRef, useMemo } = React;
+
+    // ========================================================================
+    // 1. MOTOR DE CÁLCULO NORMATIVO DETERMINÍSTICO (NOM-035-STPS-2018)
+    // ========================================================================
+
+    const ESCALA_COLORES = {
+      NULO: { nivel: "NULO", color: "#10b981", badge: "bg-emerald-50 text-emerald-800 border-emerald-200", desc: "El riesgo resulta despreciable; no se requiere intervención." },
+      BAJO: { nivel: "BAJO", color: "#22c55e", badge: "bg-green-50 text-green-800 border-green-200", desc: "Nivel de riesgo bajo; requiere mayor difusión de la política." },
+      MEDIO: { nivel: "MEDIO", color: "#f59e0b", badge: "bg-amber-50 text-amber-800 border-amber-200", desc: "Nivel de riesgo medio; requiere revisión y medidas preventivas." },
+      ALTO: { nivel: "ALTO", color: "#f97316", badge: "bg-orange-50 text-orange-800 border-orange-200", desc: "Nivel de riesgo alto; requiere intervención formal a la brevedad." },
+      MUY_ALTO: { nivel: "MUY_ALTO", color: "#ef4444", badge: "bg-red-50 text-red-800 border-red-200", desc: "Nivel de riesgo muy alto; amerita intervención prioritaria e inmediata." }
+    };
+
+    function calcularMuestra(N, H = 0, M = 0) {
+      const total = Math.max(1, Math.floor(N));
+      if (total <= 50) {
+        return { total, hombres: H, mujeres: M, esMuestreo: false };
       }
+      const num = 0.9604 * total;
+      const den = 0.0025 * (total - 1) + 0.9604;
+      const n = Math.ceil(num / den);
+      const totalG = H + M;
+      let hom = totalG > 0 ? Math.round(n * (H / totalG)) : Math.ceil(n / 2);
+      let muj = n - hom;
+      return { total: n, hombres: hom, mujeres: muj, esMuestreo: true };
+    }
 
-      /**
-       * Returns true if the test cookie is set, false otherwise.
-       */
-      function authFlowTestCookieIsSet() {
-        return getCookie(AUTH_FLOW_TEST_COOKIE_NAME) === COOKIE_VALUE;
+    function evaluarGuiaI(resp) {
+      const sec1 = [resp.s1_1, resp.s1_2, resp.s1_3, resp.s1_4, resp.s1_5].filter(Boolean).length;
+      if (sec1 === 0) {
+        return { requiere: false, motivo: "No presenció acontecimientos traumáticos severos en el trabajo." };
       }
+      const sec2 = [resp.s2_1, resp.s2_2].filter(Boolean).length;
+      const sec3 = [resp.s3_1, resp.s3_2, resp.s3_3, resp.s3_4, resp.s3_5, resp.s3_6, resp.s3_7].filter(Boolean).length;
+      const sec4 = [resp.s4_1, resp.s4_2, resp.s4_3, resp.s4_4, resp.s4_5].filter(Boolean).length;
+      const req = sec2 >= 1 || sec3 >= 3 || sec4 >= 2;
+      return {
+        requiere: req,
+        motivo: req ? "Presenta sintomatología clínica reactiva a acontecimiento traumático severo (Numeral GR.I)." : "No cumple con los umbrales sintomáticos de las secciones II, III o IV."
+      };
+    }
 
-      /**
-       * Redirects to the return url. If autoClose is true, then the return url will be opened in a
-       * new window, and it will be closed automatically when the page loads.
-       * Options:
-       *   storageAccessGranted: if true, appends __storage_access_granted=1 to
-       *   the return url so the Lua auth script can set the test cookie
-       *   server-side (needed for Safari/iOS where document.cookie is blocked).
-       */
-      async function redirectToReturnUrl(autoClose, storageAccessGranted = false) {
-        const initialReturnUrlStr = new URLSearchParams(window.location.search).get('return_url');
-        const returnUrl = initialReturnUrlStr ? new URL(initialReturnUrlStr) : null;
+    const GUIA_II_ITEMS_DIRECTOS = new Set([18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33]);
+    function puntuarItemGuiaII(num, likert) {
+      return GUIA_II_ITEMS_DIRECTOS.has(num) ? likert : 4 - likert;
+    }
 
-        // Prevent potentially malicious URLs from being used
-        if (returnUrl.protocol.toLowerCase() === 'javascript:') {
-          console.error('Potentially malicious return URL blocked');
-          return;
+    function clasificarTotalGuiaII(score) {
+      if (score < 20) return "NULO";
+      if (score < 45) return "BAJO";
+      if (score < 70) return "MEDIO";
+      if (score < 90) return "ALTO";
+      return "MUY_ALTO";
+    }
+
+    const GUIA_III_ITEMS_DIRECTOS = new Set([1,4,23,24,25,26,27,28,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,55,56,57]);
+    function puntuarItemGuiaIII(num, likert) {
+      return GUIA_III_ITEMS_DIRECTOS.has(num) ? likert : 4 - likert;
+    }
+
+    function clasificarTotalGuiaIII(score) {
+      if (score < 50) return "NULO";
+      if (score < 75) return "BAJO";
+      if (score < 99) return "MEDIO";
+      if (score < 140) return "ALTO";
+      return "MUY_ALTO";
+    }
+
+    // ========================================================================
+    // 2. BANCO DE REACTIVOS TEXTUALES OFICIALES
+    // ========================================================================
+    const BANCO_GUIA_II = {
+      1: "El espacio donde trabajo me permite realizar mis actividades de manera segura e higiénica.",
+      2: "Mi trabajo me exige hacer mucho esfuerzo físico.",
+      3: "Me preocupa sufrir un accidente en mi trabajo.",
+      4: "Considero que en mi trabajo se aplican las medidas de seguridad y salud necesarias.",
+      5: "Por la cantidad de trabajo que tengo debo quedarme tiempo adicional a mi turno.",
+      6: "Por la cantidad de trabajo que tengo debo trabajar sin parar.",
+      7: "Considero que es necesario mantener un ritmo de trabajo acelerado.",
+      8: "Mi trabajo exige que esté muy concentrado.",
+      9: "Mi trabajo requiere que memorice mucha información.",
+      10: "Mi trabajo exige que atienda varios asuntos al mismo tiempo.",
+      11: "En mi trabajo soy responsable de cosas de mucho valor.",
+      12: "Respondo ante mi jefe por el trabajo de todo mi equipo.",
+      13: "En mi trabajo tengo que tomar decisiones difíciles rápidamente.",
+      14: "Trabajo turnos consecutivos o de más de 8 horas al día.",
+      15: "Por mi trabajo tengo que laborar en días de descanso o festivos.",
+      16: "Pienso en las actividades de mi trabajo cuando estoy descansando.",
+      17: "Mis responsabilidades laborales afectan mis relaciones familiares.",
+      18: "En mi trabajo puedo decidir el ritmo al que realizo mis actividades.",
+      19: "En mi trabajo puedo decidir el orden de las actividades que realizo.",
+      20: "En mi trabajo me dan capacitación para realizar mis actividades.",
+      21: "Tengo la libertad de decidir cómo hacer mi trabajo.",
+      22: "En mi trabajo puedo tomar pausas cuando las necesito.",
+      23: "Me informan con claridad cuáles son mis responsabilidades.",
+      24: "Me explican claramente los objetivos de mi trabajo.",
+      25: "Me informan con quién puedo resolver asuntos o dudas.",
+      26: "Me informan a tiempo sobre los cambios en mi trabajo.",
+      27: "Puedo opinar sobre las nuevas formas de trabajar.",
+      28: "Mi jefe me ayuda a organizar mejor mi trabajo.",
+      29: "Mi jefe tiene en cuenta mis puntos de vista y opiniones.",
+      30: "Mi jefe me ayuda cuando tengo dificultades en el trabajo.",
+      31: "Puedo confiar en mis compañeros de trabajo.",
+      32: "Cuando tenemos dificultades en el trabajo nos apoyamos entre compañeros.",
+      33: "En mi trabajo solucionamos los desacuerdos mediante el diálogo.",
+      34: "En mi trabajo me ignoran o excluyen de las actividades del equipo.",
+      35: "En mi trabajo me asignan tareas sin sentido para molestarme.",
+      36: "He recibido burlas o comentarios despectivos sobre mi persona.",
+      37: "He sufrido amenazas físicas o agresión verbal.",
+      38: "En mi trabajo se presentan situaciones de hostigamiento.",
+      39: "En mi trabajo he presenciado o sufrido discriminación.",
+      40: "Siento que el ambiente laboral en mi centro de trabajo es tenso.",
+      41: "Atiendo clientes, usuarios o pacientes muy enojados o agresivos.",
+      42: "En mi trabajo me culpan por situaciones ajenas a mi control.",
+      43: "Mi trabajo me exige fingir una actitud alegre ante los clientes.",
+      44: "Los colaboradores a mi cargo se rehúsan a seguir instrucciones.",
+      45: "Tengo que resolver conflictos interpersonales frecuentes entre subordinados.",
+      46: "Me culpan por las fallas cometidas por las personas a mi cargo."
+    };
+
+    const BANCO_GUIA_III = {
+      ...BANCO_GUIA_II,
+      47: "Me asignan tareas imposibles de cumplir para degradarme.",
+      48: "He recibido gritos o insultos por parte de superiores o compañeros.",
+      49: "He sido víctima de agresiones físicas en el trabajo.",
+      50: "He presenciado insinuaciones sexuales no deseadas en mi centro.",
+      51: "Siento que en mi trabajo se normaliza el maltrato hacia el personal.",
+      52: "En mi empresa reconocen el buen desempeño y esfuerzo extra.",
+      53: "Siento que el salario y prestaciones son justos para mi trabajo.",
+      54: "En mi trabajo se premia el favoritismo por encima del mérito.",
+      55: "Tengo posibilidades reales de ascender en esta empresa.",
+      56: "Siento orgullo de pertenecer a esta empresa y me identifico.",
+      57: "La empresa cumple con los compromisos que establece.",
+      58: "Me preocupa perder mi empleo a corto plazo.",
+      59: "En mi trabajo me cambian frecuentemente de puesto sin avisarme.",
+      60: "Siento incertidumbre sobre la permanencia de la empresa.",
+      61: "La empresa cuenta con canales claros para inconformidades.",
+      62: "Los directivos muestran interés genuino por la salud del personal.",
+      63: "Se promueve el trato digno, la equidad y la no discriminación.",
+      64: "Recomendaría a un familiar trabajar en esta organización.",
+      65: "Trato con clientes o usuarios agresivos con alta frecuencia.",
+      66: "Los clientes me responsabilizan injustamente por fallas del servicio.",
+      67: "Tengo que contener mis emociones ante ofensas de usuarios.",
+      68: "Mi trabajo me expone a riesgos de violencia por parte del público.",
+      69: "Los colaboradores que superviso cumplen oportunamente con tareas.",
+      70: "Es difícil mantener el orden con las personas bajo mi mando.",
+      71: "Tengo que intervenir con frecuencia en pleitos entre subordinados.",
+      72: "Mis superiores me culpan por bajo rendimiento de mis subordinados."
+    };
+
+    const LIKERT_OPCIONES = [
+      { val: 0, text: "Siempre" },
+      { val: 1, text: "Casi siempre" },
+      { val: 2, text: "Algunas veces" },
+      { val: 3, text: "Casi nunca" },
+      { val: 4, text: "Nunca" }
+    ];
+
+    // Datos iniciales precargados
+    const SEED_EMPRESAS = [
+      {
+        id: "emp-01",
+        rfc: "MBA180315KJ8",
+        razonSocial: "Manufacturas del Bajío S.A. de C.V.",
+        nombreComercial: "Bajío Precision Parts",
+        giro: "Industria Manufacturera Metalmecánica",
+        actividadPrincipal: "Fabricación de estampados metálicos y componentes para chasises",
+        direccion: "Av. De la Industria No. 405, Parque Industrial Querétaro",
+        municipioEstado: "Querétaro, Qro.",
+        codigoPostal: "76220",
+        contactoNombre: "Lic. Andrea Morales Rivas",
+        contactoEmail: "amorales@bajioprecision.com.mx",
+        plantillaTotal: 185
+      },
+      {
+        id: "emp-02",
+        rfc: "LTM160722PQ4",
+        razonSocial: "Logística y Transporte Metropolitano S.A. de C.V.",
+        nombreComercial: "MetroLogix México",
+        giro: "Transporte y Almacenamiento",
+        actividadPrincipal: "Distribución última milla y paquetería consolidada",
+        direccion: "Calzada Vallejo No. 1280, Col. Santa Cruz",
+        municipioEstado: "Azcapotzalco, CDMX",
+        codigoPostal: "02340",
+        contactoNombre: "Ing. Roberto Garza Treviño",
+        contactoEmail: "rgarza@metrologix.com.mx",
+        plantillaTotal: 42
+      }
+    ];
+
+    const SEED_CENTROS = [
+      {
+        id: "ct-01",
+        empresaId: "emp-01",
+        codigoCentro: "CT-BAJIO-P1",
+        nombreSede: "Planta Estampado Nave 1",
+        direccion: "Av. De la Industria No. 405, Parque Ind. Querétaro",
+        plantillaTotal: 185,
+        plantillaHombres: 125,
+        plantillaMujeres: 60,
+        tipoGuia: "GUIA_III",
+        muestraCalculada: 126,
+        tokenAcceso: "BAJIO-NV1-2024"
+      },
+      {
+        id: "ct-02",
+        empresaId: "emp-02",
+        codigoCentro: "CT-METRO-VALLEJO",
+        nombreSede: "CEDIS Central Vallejo",
+        direccion: "Calzada Vallejo No. 1280, CDMX",
+        plantillaTotal: 42,
+        plantillaHombres: 30,
+        plantillaMujeres: 12,
+        tipoGuia: "GUIA_II",
+        muestraCalculada: 42,
+        tokenAcceso: "METRO-VAL-2024"
+      }
+    ];
+
+    const SEED_EVALUACIONES = [
+      {
+        id: "ev-01",
+        empresaId: "emp-01",
+        centroId: "ct-01",
+        fecha: "2024-05-10",
+        folio: "FOL-CT1-0081-CONF",
+        genero: "M",
+        departamento: "Producción / Troqueles",
+        puesto: "Operador de Troqueladora",
+        scoreTotal: 104,
+        nivelTotal: "ALTO",
+        atsClinico: true,
+        tipoGuia: "GUIA_III"
+      },
+      {
+        id: "ev-02",
+        empresaId: "emp-01",
+        centroId: "ct-01",
+        fecha: "2024-05-11",
+        folio: "FOL-CT1-0082-CONF",
+        genero: "F",
+        departamento: "Calidad y Metrología",
+        puesto: "Inspectora de Control",
+        scoreTotal: 62,
+        nivelTotal: "BAJO",
+        atsClinico: false,
+        tipoGuia: "GUIA_III"
+      },
+      {
+        id: "ev-03",
+        empresaId: "emp-01",
+        centroId: "ct-01",
+        fecha: "2024-05-12",
+        folio: "FOL-CT1-0083-CONF",
+        genero: "M",
+        departamento: "Mantenimiento",
+        puesto: "Líder de Turno",
+        scoreTotal: 88,
+        nivelTotal: "MEDIO",
+        atsClinico: true,
+        tipoGuia: "GUIA_III"
+      }
+    ];
+
+    const SEED_PLANES = [
+      {
+        id: "pl-01",
+        empresaId: "emp-01",
+        nivel: "NIVEL_1",
+        titulo: "Política de Desconexión Digital y Rediseño de Turnos",
+        dominio: "Jornada de trabajo e interferencia familia",
+        responsable: "Lic. Andrea Morales (RH) y Comité",
+        limite: "2024-08-30",
+        avance: 65,
+        estatus: "EN_EJECUCION"
+      },
+      {
+        id: "pl-02",
+        empresaId: "emp-01",
+        nivel: "NIVEL_2",
+        titulo: "Taller Grupal de Liderazgo Positivo para Supervisores",
+        dominio: "Liderazgo y Carga de trabajo",
+        responsable: "Consultor SST y Capacitación",
+        limite: "2024-09-15",
+        avance: 45,
+        estatus: "EN_EJECUCION"
+      },
+      {
+        id: "pl-03",
+        empresaId: "emp-01",
+        nivel: "NIVEL_3",
+        titulo: "Protocolo de Canalización Psicológica y Médica (ATS)",
+        dominio: "Acontecimientos Traumáticos Severos",
+        responsable: "Dr. Manuel Paredes (Médico de Planta)",
+        limite: "2024-11-30",
+        avance: 80,
+        estatus: "EN_EJECUCION"
+      }
+    ];
+
+    const SEED_QUEJAS = [
+      {
+        id: "qj-01",
+        empresaId: "emp-01",
+        folio: "FOL-QJ-2024-8841-BZ",
+        fecha: "2024-05-20",
+        tipo: "MALTRATO_FISICO_VERBAL",
+        area: "Línea de Ensamble Chasis Nave 1",
+        estatus: "EN_INVESTIGACION",
+        desc: "El supervisor de la línea utilizó palabras altisonantes frente al personal operativo por un retraso de material.",
+        accion: "La Comisión de Ética citó a comparecencia privada y activó mediación pacífica."
+      }
+    ];
+
+    // ========================================================================
+    // 3. APLICACIÓN PRINCIPAL (APP CONSOLIDADA EN 1 SOLO ARCHIVO)
+    // ========================================================================
+
+    function App() {
+      const [vista, setVista] = useState("superadmin");
+      
+      const [empresas, setEmpresas] = useState(() => {
+        const s = localStorage.getItem("nom035_single_empresas");
+        return s ? JSON.parse(s) : SEED_EMPRESAS;
+      });
+      const [centros, setCentros] = useState(() => {
+        const s = localStorage.getItem("nom035_single_centros");
+        return s ? JSON.parse(s) : SEED_CENTROS;
+      });
+      const [evaluaciones, setEvaluaciones] = useState(() => {
+        const s = localStorage.getItem("nom035_single_evals");
+        return s ? JSON.parse(s) : SEED_EVALUACIONES;
+      });
+      const [planes, setPlanes] = useState(() => {
+        const s = localStorage.getItem("nom035_single_planes");
+        return s ? JSON.parse(s) : SEED_PLANES;
+      });
+      const [quejas, setQuejas] = useState(() => {
+        const s = localStorage.getItem("nom035_single_quejas");
+        return s ? JSON.parse(s) : SEED_QUEJAS;
+      });
+
+      const [empresaId, setEmpresaId] = useState("emp-01");
+      const [centroId, setCentroId] = useState("ct-01");
+
+      const [evaluador, setEvaluador] = useState({
+        nombre: "Mtro. Carlos A. Luna Domínguez",
+        cedula: "CED-PSIC-8492019-MX",
+        profesion: "Especialista en Psicología del Trabajo y SST",
+        registroSTPS: "AGENTE-CAP-STPS-LUDC840912-005"
+      });
+
+      useEffect(() => {
+        localStorage.setItem("nom035_single_empresas", JSON.stringify(empresas));
+        localStorage.setItem("nom035_single_centros", JSON.stringify(centros));
+        localStorage.setItem("nom035_single_evals", JSON.stringify(evaluaciones));
+        localStorage.setItem("nom035_single_planes", JSON.stringify(planes));
+        localStorage.setItem("nom035_single_quejas", JSON.stringify(quejas));
+      }, [empresas, centros, evaluaciones, planes, quejas]);
+
+      useEffect(() => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }, [vista]);
+
+      const empresaActiva = empresas.find(e => e.id === empresaId) || empresas[0];
+      const centrosDeEmpresa = centros.filter(c => c.empresaId === empresaId);
+      const centroActivo = centros.find(c => c.id === centroId) || centrosDeEmpresa[0] || centros[0];
+      const evalsDeEmpresa = evaluaciones.filter(e => e.empresaId === empresaId);
+
+      return (
+        <div className="flex-1 flex flex-col">
+          {/* HEADER DE NAVEGACIÓN */}
+          <header className="bg-gradient-to-r from-[#0a1727] via-[#122842] to-[#0c1a2d] text-white border-b border-[#224368] sticky top-0 z-50 shadow-lg no-print">
+            <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between flex-wrap gap-3">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-md bg-gradient-to-br from-teal-400 via-emerald-500 to-[#5a6b32] flex items-center justify-center font-black text-slate-950 text-xs shadow-md border border-teal-200/50">
+                  035
+                </div>
+                <div>
+                  <h1 className="font-bold text-sm tracking-tight text-slate-100">
+                    Plataforma Integral NOM-035-STPS-2018
+                  </h1>
+                  <div className="flex items-center gap-2">
+                    <span className="text-[11px] text-teal-300 font-mono">
+                      SaaS Multi-Tenant · Archivo Único Autónomo
+                    </span>
+                    <span className="text-[10px] font-mono text-[#cde2a3] bg-[#233118]/90 px-1.5 py-0.2 rounded border border-[#485f2f]">
+                      DOF OFICIAL
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Selector de Cliente / Tenant */}
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-[#a5b980] hidden sm:inline font-medium">Cliente:</span>
+                <select
+                  value={empresaId}
+                  onChange={(e) => {
+                    setEmpresaId(e.target.value);
+                    const c = centros.find(ct => ct.empresaId === e.target.value);
+                    if (c) setCentroId(c.id);
+                  }}
+                  className="bg-[#142842] border border-[#254870] hover:border-teal-400/50 text-xs rounded px-2.5 py-1 text-slate-100 focus:outline-none transition"
+                >
+                  {empresas.map(e => (
+                    <option key={e.id} value={e.id} className="bg-[#0e1d30]">{e.nombreComercial} ({e.rfc})</option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            {/* BARRA DE PESTAÑAS */}
+            <nav className="max-w-7xl mx-auto px-4 flex gap-1 overflow-x-auto border-t border-[#1b3452] text-xs py-1.5">
+              {[
+                { id: "superadmin", label: "Consultor (SuperAdmin)" },
+                { id: "client", label: "Portal Cliente (RH)" },
+                { id: "worker", label: "Autoaplicación Trabajador" },
+                { id: "buzon", label: "Buzón Confidencial (8.1)" },
+                { id: "reporte", label: "Reporte Oficial STPS (7.7)" }
+              ].map(item => (
+                <button
+                  key={item.id}
+                  onClick={() => setVista(item.id)}
+                  className={`px-3 py-1.5 rounded font-medium transition whitespace-nowrap ${
+                    vista === item.id
+                      ? "bg-[#18375c] text-teal-300 border border-teal-400/60 font-bold shadow-xs shadow-teal-950/40"
+                      : "text-slate-300 hover:text-white hover:bg-[#152e4d]"
+                  }`}
+                >
+                  {item.label}
+                </button>
+              ))}
+            </nav>
+          </header>
+
+          {/* CONTENIDO PRINCIPAL SEGÚN PESTAÑA */}
+          <main className="flex-1 max-w-7xl mx-auto px-4 py-6 w-full">
+            {vista === "superadmin" && (
+              <VistaSuperAdmin
+                empresas={empresas}
+                centros={centros}
+                evaluaciones={evaluaciones}
+                setEmpresas={setEmpresas}
+                setCentros={setCentros}
+                setEmpresaId={setEmpresaId}
+                setVista={setVista}
+              />
+            )}
+
+            {vista === "client" && (
+              <VistaClienteRH
+                empresa={empresaActiva}
+                centros={centrosDeEmpresa}
+                evaluaciones={evalsDeEmpresa}
+                planes={planes.filter(p => p.empresaId === empresaId)}
+                setPlanes={setPlanes}
+                setVista={setVista}
+              />
+            )}
+
+            {vista === "worker" && (
+              <VistaTrabajador
+                centros={centros}
+                empresas={empresas}
+                onRegistrarEvaluacion={(nueva) => setEvaluaciones(prev => [nueva, ...prev])}
+              />
+            )}
+
+            {vista === "buzon" && (
+              <VistaBuzon
+                empresas={empresas}
+                centros={centros}
+                quejas={quejas.filter(q => q.empresaId === empresaId)}
+                onRegistrarQueja={(nueva) => setQuejas(prev => [nueva, ...prev])}
+              />
+            )}
+
+            {vista === "reporte" && (
+              <VistaReporteOficial77
+                empresa={empresaActiva}
+                centro={centroActivo}
+                centros={centrosDeEmpresa}
+                setCentroId={setCentroId}
+                evaluaciones={evaluaciones.filter(e => e.centroId === centroActivo.id)}
+                evaluador={evaluador}
+                setEvaluador={setEvaluador}
+              />
+            )}
+          </main>
+
+          <footer className="bg-slate-900 text-slate-400 text-xs py-4 px-4 border-t border-slate-800 text-center no-print mt-auto">
+            Plataforma Integral NOM-035-STPS-2018 · Baremos Oficiales del DOF (23/10/2018) · Código Autónomo 100% Funcional
+          </footer>
+        </div>
+      );
+    }
+
+    // ========================================================================
+    // 4. MÓDULO SUPERADMIN / CONSULTOR SST
+    // ========================================================================
+    function VistaSuperAdmin({ empresas, centros, evaluaciones, setEmpresas, setCentros, setEmpresaId, setVista }) {
+      const [nCalc, setNCalc] = useState(120);
+      const [hCalc, setHCalc] = useState(70);
+      const [mCalc, setMCalc] = useState(50);
+      const muestra = calcularMuestra(nCalc, hCalc, mCalc);
+
+      return (
+        <div className="space-y-6">
+          <div className="bg-white p-5 rounded-lg border border-slate-200 shadow-xs flex justify-between items-center flex-wrap gap-4">
+            <div>
+              <span className="text-[11px] font-mono text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200 font-bold">
+                CONSOLA DEL CONSULTOR SST
+              </span>
+              <h2 className="text-lg font-bold text-slate-900 mt-1">Gestión Global de Empresas Clientes</h2>
+              <p className="text-xs text-slate-500">Supervisión multi-tenant, asignación de guías y cálculo de representatividad muestral.</p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="lg:col-span-2 space-y-4">
+              <h3 className="text-sm font-bold text-slate-900">Cartera de Empresas Clientes ({empresas.length})</h3>
+              {empresas.map(emp => {
+                const cts = centros.filter(c => c.empresaId === emp.id);
+                const evs = evaluaciones.filter(e => e.empresaId === emp.id);
+                const riesgoAlto = evs.filter(e => e.nivelTotal === "ALTO" || e.nivelTotal === "MUY_ALTO").length;
+
+                return (
+                  <div key={emp.id} className="bg-white border border-slate-200 rounded-lg p-4 shadow-xs">
+                    <div className="flex justify-between items-start pb-3 border-b border-slate-100">
+                      <div>
+                        <h4 className="font-bold text-sm text-slate-900">{emp.razonSocial}</h4>
+                        <p className="text-xs text-slate-500">{emp.nombreComercial} · RFC: {emp.rfc} · {emp.giro}</p>
+                      </div>
+                      <button
+                        onClick={() => { setEmpresaId(emp.id); setVista("client"); }}
+                        className="text-xs bg-slate-900 hover:bg-black text-white px-3 py-1.5 rounded font-semibold"
+                      >
+                        Abrir Portal RH
+                      </button>
+                    </div>
+
+                    <div className="mt-3 space-y-2">
+                      <span className="text-[10px] uppercase font-bold text-slate-400">Centros de Trabajo:</span>
+                      {cts.map(c => (
+                        <div key={c.id} className="p-2.5 bg-slate-50 border border-slate-200 rounded text-xs flex justify-between items-center">
+                          <div>
+                            <span className="font-bold text-slate-800">{c.nombreSede}</span>
+                            <span className="text-slate-500 ml-2">({c.tipoGuia}) · Plantilla: {c.plantillaTotal}</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <span className="font-mono bg-white px-2 py-0.5 rounded border text-[11px] font-bold text-emerald-800">
+                              Token: {c.tokenAcceso}
+                            </span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="mt-3 pt-2 border-t border-slate-100 flex justify-between text-[11px] text-slate-500">
+                      <span>Evaluaciones registradas: <strong>{evs.length}</strong></span>
+                      <span>En riesgo Alto/Muy Alto: <strong className={riesgoAlto > 0 ? "text-amber-600 font-bold" : "text-emerald-600"}>{riesgoAlto}</strong></span>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* CALCULADORA MUESTRAL OFICIAL */}
+            <div className="bg-white border border-slate-200 rounded-lg p-5 shadow-xs space-y-4 h-fit">
+              <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider">
+                Calculadora Muestral Oficial (Ecuación 1)
+              </h3>
+              <p className="text-xs text-slate-500">
+                Aplica para centros de trabajo con más de 50 trabajadores conforme a la NOM-035.
+              </p>
+              <div className="bg-slate-900 text-emerald-300 font-mono text-[11px] p-2.5 rounded text-center">
+                n = (0.9604 · N) / [0.0025 · (N - 1) + 0.9604]
+              </div>
+
+              <div className="space-y-2 text-xs">
+                <div>
+                  <label className="block text-slate-700 font-medium">Plantilla Total (N):</label>
+                  <input
+                    type="number"
+                    min="1"
+                    value={nCalc}
+                    onChange={(e) => {
+                      const v = parseInt(e.target.value) || 1;
+                      setNCalc(v);
+                      setHCalc(Math.round(v * 0.6));
+                      setMCalc(v - Math.round(v * 0.6));
+                    }}
+                    className="w-full border rounded px-2.5 py-1.5 text-xs mt-1"
+                  />
+                </div>
+                <div className="grid grid-cols-2 gap-2">
+                  <div>
+                    <label className="block text-slate-600 text-[11px]">Hombres:</label>
+                    <input
+                      type="number"
+                      value={hCalc}
+                      onChange={(e) => setHCalc(parseInt(e.target.value) || 0)}
+                      className="w-full border rounded px-2 py-1 text-xs mt-0.5"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-slate-600 text-[11px]">Mujeres:</label>
+                    <input
+                      type="number"
+                      value={mCalc}
+                      onChange={(e) => setMCalc(parseInt(e.target.value) || 0)}
+                      className="w-full border rounded px-2 py-1 text-xs mt-0.5"
+                    />
+                  </div>
+                </div>
+
+                <div className="bg-emerald-50 border border-emerald-200 rounded p-3 text-emerald-900 space-y-1 mt-3">
+                  <div className="flex justify-between items-center font-bold">
+                    <span>Tamaño de Muestra (n):</span>
+                    <span className="text-xl text-emerald-800">{muestra.total}</span>
+                  </div>
+                  <div className="text-[11px] text-emerald-700">
+                    {muestra.esMuestreo ? "Muestreo probabilístico con 95% de confianza." : "Censo total (plantilla ≤ 50)."}
+                  </div>
+                  <div className="pt-2 border-t border-emerald-200/80 text-[11px] flex justify-between">
+                    <span>Hombres a evaluar: <strong>{muestra.hombres}</strong></span>
+                    <span>Mujeres: <strong>{muestra.mujeres}</strong></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    // ========================================================================
+    // 5. MÓDULO PORTAL DEL CLIENTE (RH / DIRECCIÓN)
+    // ========================================================================
+    function VistaClienteRH({ empresa, centros, evaluaciones, planes, setPlanes, setVista }) {
+      const [tabRH, setTabRH] = useState("analitica");
+      const canalizados = evaluaciones.filter(e => e.atsClinico);
+
+      return (
+        <div className="space-y-6">
+          <div className="bg-white p-5 rounded-lg border border-slate-200 shadow-xs flex justify-between items-center flex-wrap gap-4">
+            <div>
+              <span className="text-[11px] font-mono text-blue-700 bg-blue-50 px-2 py-0.5 rounded border border-blue-200 font-bold">
+                PORTAL EMPRESARIAL (RH / DIRECCIÓN)
+              </span>
+              <h2 className="text-lg font-bold text-slate-900 mt-1">{empresa.razonSocial}</h2>
+              <p className="text-xs text-slate-500">RFC: {empresa.rfc} · Plantilla: {empresa.plantillaTotal} colaboradores</p>
+            </div>
+            <div className="flex gap-2">
+              <button
+                onClick={() => setVista("reporte")}
+                className="bg-slate-900 hover:bg-black text-white text-xs px-3.5 py-2 rounded font-semibold"
+              >
+                Generar Informe Numeral 7.7
+              </button>
+            </div>
+          </div>
+
+          <div className="flex gap-2">
+            {[
+              { id: "analitica", label: "Tablero Analítico" },
+              { id: "alerta", label: `Alerta Médica Confidencial (${canalizados.length})` },
+              { id: "planes", label: `Planes de Intervención (${planes.length})` }
+            ].map(t => (
+              <button
+                key={t.id}
+                onClick={() => setTabRH(t.id)}
+                className={`px-3 py-1.5 text-xs rounded font-semibold transition ${
+                  tabRH === t.id
+                    ? "bg-slate-800 text-white"
+                    : "bg-white border text-slate-600 hover:bg-slate-50"
+                }`}
+              >
+                {t.label}
+              </button>
+            ))}
+          </div>
+
+          {tabRH === "analitica" && (
+            <div className="space-y-6">
+              <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+                {["NULO", "BAJO", "MEDIO", "ALTO", "MUY_ALTO"].map(nivel => {
+                  const meta = ESCALA_COLORES[nivel];
+                  const c = evaluaciones.filter(e => e.nivelTotal === nivel).length;
+                  return (
+                    <div key={nivel} className="bg-white p-3.5 rounded-lg border border-slate-200 shadow-xs">
+                      <div className="flex justify-between items-center text-xs font-bold text-slate-600">
+                        <span>{nivel}</span>
+                        <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: meta.color }} />
+                      </div>
+                      <div className="text-2xl font-bold mt-1 text-slate-900">{c}</div>
+                      <div className="text-[10px] text-slate-400">cuestionarios</div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              <div className="bg-white p-5 rounded-lg border border-slate-200 shadow-xs space-y-3">
+                <h3 className="text-xs font-bold text-slate-900 uppercase">Muestra Evaluada sin Nombres (Garantía STPS)</h3>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-left text-xs">
+                    <thead className="bg-slate-50 text-slate-600 border-y">
+                      <tr>
+                        <th className="py-2 px-2.5">Folio Anónimo</th>
+                        <th className="py-2 px-2.5">Fecha</th>
+                        <th className="py-2 px-2.5">Departamento / Puesto</th>
+                        <th className="py-2 px-2.5 text-center">Puntaje</th>
+                        <th className="py-2 px-2.5 text-center">Nivel Riesgo</th>
+                        <th className="py-2 px-2.5 text-center">Canalización Médica</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y">
+                      {evaluaciones.map(ev => (
+                        <tr key={ev.id} className="hover:bg-slate-50">
+                          <td className="py-2.5 px-2.5 font-mono font-bold text-slate-800">{ev.folio}</td>
+                          <td className="py-2.5 px-2.5 text-slate-500">{ev.fecha}</td>
+                          <td className="py-2.5 px-2.5 text-slate-700">{ev.departamento} ({ev.puesto})</td>
+                          <td className="py-2.5 px-2.5 text-center font-bold">{ev.scoreTotal} pts</td>
+                          <td className="py-2.5 px-2.5 text-center">
+                            <span className={`text-[10px] font-bold px-2 py-0.5 rounded border ${ESCALA_COLORES[ev.nivelTotal].badge}`}>
+                              {ev.nivelTotal}
+                            </span>
+                          </td>
+                          <td className="py-2.5 px-2.5 text-center">
+                            {ev.atsClinico ? (
+                              <span className="text-[10px] font-bold text-red-700 bg-red-50 border border-red-200 px-2 py-0.5 rounded">
+                                Requiere Atención
+                              </span>
+                            ) : (
+                              <span className="text-[10px] text-slate-400">No aplica</span>
+                            )}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {tabRH === "alerta" && (
+            <div className="bg-white p-5 rounded-lg border border-slate-200 shadow-xs space-y-4">
+              <div className="p-3 bg-red-50 border border-red-200 rounded text-xs text-red-900">
+                <strong>Alerta Médica de Confidencialidad Absoluta:</strong> Listado de trabajadores que respondieron afirmativamente a la sintomatología de estrés postraumático (Guía I). No se muestran nombres para evitar revictimización; la canalización se hace mediante su folio con el médico de planta o IMSS.
+              </div>
+              <div className="space-y-2">
+                {canalizados.map(c => (
+                  <div key={c.id} className="p-3 bg-slate-50 border rounded flex justify-between items-center text-xs">
+                    <div>
+                      <span className="font-mono font-bold text-slate-900">{c.folio}</span>
+                      <span className="text-slate-500 ml-2">· {c.departamento}</span>
+                    </div>
+                    <span className="text-[11px] font-bold text-red-700 bg-red-100 px-2.5 py-1 rounded">
+                      Canalizar a Medicina del Trabajo / IMSS
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {tabRH === "planes" && (
+            <div className="bg-white p-5 rounded-lg border border-slate-200 shadow-xs space-y-4">
+              <div className="flex justify-between items-center">
+                <h3 className="text-sm font-bold text-slate-900">Planes de Intervención por Niveles (8.4 y 8.5)</h3>
+              </div>
+              <div className="space-y-3">
+                {planes.map(pl => (
+                  <div key={pl.id} className="p-4 bg-slate-50 border rounded-lg space-y-2 text-xs">
+                    <div className="flex justify-between items-center">
+                      <span className="font-bold text-[10px] px-2 py-0.5 rounded bg-blue-100 text-blue-900">
+                        {pl.nivel}
+                      </span>
+                      <span className="text-slate-500">Límite: {pl.limite}</span>
+                    </div>
+                    <h4 className="font-bold text-sm text-slate-900">{pl.titulo}</h4>
+                    <p className="text-slate-600">Dominio: {pl.dominio} · Responsable: {pl.responsable}</p>
+                    <div className="pt-2">
+                      <div className="flex justify-between text-[11px] text-slate-500 mb-1">
+                        <span>Avance de Implementación</span>
+                        <span className="font-bold">{pl.avance}%</span>
+                      </div>
+                      <div className="w-full bg-slate-200 rounded-full h-2">
+                        <div className="bg-emerald-600 h-2 rounded-full" style={{ width: `${pl.avance}%` }} />
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      );
+    }
+
+    // ========================================================================
+    // 6. MÓDULO AUTOAPLICACIÓN DEL TRABAJADOR (CON SCROLL AL INICIO)
+    // ========================================================================
+    function VistaTrabajador({ centros, empresas, onRegistrarEvaluacion }) {
+      const topRef = useRef(null);
+      const [paso, setPaso] = useState(1);
+      const [tokenInput, setTokenInput] = useState("");
+      const [tokenError, setTokenError] = useState("");
+      const [centroSel, setCentroSel] = useState(centros[0]);
+      const [aceptoAviso, setAceptoAviso] = useState(false);
+
+      const [fichaV, setFichaV] = useState({
+        genero: "M",
+        rangoEdad: "30-39",
+        departamento: "Operaciones",
+        puesto: "Operador de Planta",
+        clientes: false,
+        subordinados: false
+      });
+
+      const [respI, setRespI] = useState({
+        s1_1: false, s1_2: false, s1_3: false, s1_4: false, s1_5: false,
+        s2_1: false, s2_2: false,
+        s3_1: false, s3_2: false, s3_3: false, s3_4: false, s3_5: false, s3_6: false, s3_7: false,
+        s4_1: false, s4_2: false, s4_3: false, s4_4: false, s4_5: false
+      });
+
+      const [respLikert, setRespLikert] = useState({});
+      const [bloqueActual, setBloqueActual] = useState(1);
+      const itemsPorBloque = 10;
+      const [folioFinal, setFolioFinal] = useState("");
+
+      useEffect(() => {
+        if (topRef.current) {
+          topRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
         }
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }, [paso, bloqueActual]);
 
-        if (storageAccessGranted) {
-          returnUrl.searchParams.set('__storage_access_granted', '1');
-        }
-
-        if (autoClose) {
-          returnUrl.searchParams.set('__auto_close', '1');
-          const url = new URL(window.location.href);
-          url.searchParams.set('return_url', returnUrl.toString());
-          // Land on the cookie check page first, so the user can interact with it before proceeding
-          // to the return url where cookies can be set.
-          window.open(url.toString(), '_blank');
-          const hasAccess = await document.hasStorageAccess();
-          document.querySelector('#stepOne').classList.add('hidden');
-          if (!hasAccess) {
-            document.querySelector('#stepThree').classList.remove('hidden');
-          } else {
-            window.location.reload();
-          }
+      const handleToken = (e) => {
+        e.preventDefault();
+        const t = tokenInput.trim().toUpperCase();
+        const c = centros.find(item => item.tokenAcceso.toUpperCase() === t || item.codigoCentro.toUpperCase() === t);
+        if (c) {
+          setCentroSel(c);
+          setTokenError("");
+          setPaso(2);
         } else {
-          window.location.href = returnUrl.toString();
+          setTokenError("Token incorrecto. Verifique con su departamento de Recursos Humanos.");
         }
-      }
+      };
 
-      /**
-       * Grants the browser permission to set cookies. If successful, then it redirects to the
-       * return url.
-       */
-      async function grantStorageAccess() {
-        try {
-          await document.requestStorageAccess();
-          // Recent Safari/iOS versions block document.cookie entirely in
-          // cross-site iframes, even after requestStorageAccess(). Only
-          // server-side Set-Cookie headers work. Signal to the Lua auth script
-          // via query param so it can set the test cookie server-side.
-          redirectToReturnUrl(false, /* storageAccessGranted= */ true);
-        } catch (err) {
-          console.log('error after button click: ', err);
-        }
-      }
+      const banco = centroSel.tipoGuia === "GUIA_II" ? BANCO_GUIA_II : BANCO_GUIA_III;
+      const totalItems = Object.keys(banco).length;
+      const totalBloques = Math.ceil(totalItems / itemsPorBloque);
+      const itemsEnBloque = Object.entries(banco).slice((bloqueActual - 1) * itemsPorBloque, bloqueActual * itemsPorBloque);
 
-      /**
-       * Verifies that the browser can set cookies. If it can, then it redirects to the return url.
-       * If it can't, then it shows the error UI.
-       */
-      function verifyCanSetCookies() {
-        setAuthFlowTestCookie();
-        if (authFlowTestCookieIsSet()) {
-          // Check if we are on the auto-close flow, and if so show the interact button.
-          const returnUrl = new URLSearchParams(window.location.search).get('return_url');
-          const autoClose = new URL(returnUrl).searchParams.has('__auto_close');
-          if (autoClose) {
-            document.querySelector('#stepOne').classList.add('hidden');
-            document.querySelector('#stepTwo').classList.remove('hidden');
-          } else {
-            redirectToReturnUrl(false);
-            return;
-          }
-        }
-        // The cookie could not be set, so initiate the recovery flow.
-        document.querySelector('.logo').classList.add('hidden');
-        document.querySelector('.spinner').classList.add('hidden');
-        document.querySelector('#error-ui').classList.remove('hidden');
-      }
+      const handleTerminar = () => {
+        const folio = `FOL-${centroSel.codigoCentro}-${Math.floor(10000 + Math.random() * 90000)}`;
+        const resATS = evaluarGuiaI(respI);
+        
+        let score = 0;
+        Object.entries(respLikert).forEach(([numStr, val]) => {
+          const num = parseInt(numStr);
+          score += centroSel.tipoGuia === "GUIA_II" ? puntuarItemGuiaII(num, val) : puntuarItemGuiaIII(num, val);
+        });
 
-      // Start the cookie verification process.
-      verifyCanSetCookies();
-    </script>
-  </body>
+        const nivel = centroSel.tipoGuia === "GUIA_II" ? clasificarTotalGuiaII(score) : clasificarTotalGuiaIII(score);
+
+        const nuevaEv = {
+          id: `ev-${Date.now()}`,
+          empresaId: centroSel.empresaId,
+          centroId: centroSel.id,
+          fecha: new Date().toISOString().split("T")[0],
+          folio,
+          genero: fichaV.genero,
+          departamento: fichaV.departamento,
+          puesto: fichaV.puesto,
+          scoreTotal: score,
+          nivelTotal: nivel,
+          atsClinico: resATS.requiere,
+          tipoGuia: centroSel.tipoGuia
+        };
+
+        onRegistrarEvaluacion(nuevaEv);
+        setFolioFinal(folio);
+        setPaso(6);
+      };
+
+      return (
+        <div ref={topRef} className="max-w-3xl mx-auto space-y-6">
+          <div className="bg-slate-900 text-white p-4 rounded-lg flex justify-between items-center text-xs">
+            <div>
+              <span className="font-bold">AUTOAPLICACIÓN OFICIAL NOM-035</span>
+              <span className="ml-2 text-slate-400">· Centro: {centroSel.nombreSede}</span>
+            </div>
+            <div className="font-mono text-emerald-400">Paso {paso} de 6</div>
+          </div>
+
+          {/* PASO 1: TOKEN */}
+          {paso === 1 && (
+            <div className="bg-white p-6 sm:p-8 rounded-lg border border-slate-200 shadow-xs space-y-4">
+              <h2 className="text-lg font-bold text-center text-slate-900">Bienvenido a la Evaluación Psicosocial</h2>
+              <p className="text-xs text-slate-600 text-center max-w-md mx-auto">
+                Ingrese el código o token proporcionado por su centro de trabajo para iniciar la evaluación anónima.
+              </p>
+
+              <form onSubmit={handleToken} className="max-w-sm mx-auto space-y-3 pt-2">
+                <input
+                  type="text"
+                  placeholder="Ej. BAJIO-NV1-2024"
+                  value={tokenInput}
+                  onChange={(e) => setTokenInput(e.target.value)}
+                  className="w-full text-center font-mono uppercase text-sm border rounded py-2"
+                />
+                {tokenError && <p className="text-xs text-red-600">{tokenError}</p>}
+                <button type="submit" className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs py-2.5 rounded">
+                  Validar Token y Comenzar
+                </button>
+              </form>
+
+              <div className="border-t pt-4 text-center">
+                <span className="text-[11px] text-slate-400 block mb-2">O seleccione directamente un centro de demostración:</span>
+                <div className="flex gap-2 justify-center flex-wrap">
+                  {centros.map(c => (
+                    <button
+                      key={c.id}
+                      onClick={() => { setCentroSel(c); setPaso(2); }}
+                      className="text-xs bg-slate-50 border hover:bg-slate-100 px-3 py-1.5 rounded text-slate-700"
+                    >
+                      {c.nombreSede} ({c.tokenAcceso})
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* PASO 2: AVISO PRIVACIDAD */}
+          {paso === 2 && (
+            <div className="bg-white p-6 sm:p-8 rounded-lg border border-slate-200 shadow-xs space-y-4">
+              <h2 className="text-base font-bold text-slate-900">Aviso de Privacidad y Confidencialidad Obligatoria</h2>
+              <div className="bg-slate-50 p-4 rounded text-xs text-slate-700 space-y-2 max-h-60 overflow-y-auto leading-relaxed border">
+                <p><strong>1. Confidencialidad:</strong> Sus respuestas son 100% anónimas. En ningún momento se recopila nombre ni número de empleado.</p>
+                <p><strong>2. Objetivo de la norma:</strong> Identificar y analizar factores de riesgo psicosocial en el trabajo y prevenir daños a la salud.</p>
+                <p><strong>3. Cero Represalias:</strong> La información no podrá ser utilizada en su perjuicio bajo ninguna circunstancia.</p>
+              </div>
+
+              <label className="flex items-center gap-2 p-3 bg-emerald-50 border border-emerald-200 rounded cursor-pointer text-xs text-emerald-950 font-medium">
+                <input
+                  type="checkbox"
+                  checked={aceptoAviso}
+                  onChange={(e) => setAceptoAviso(e.target.checked)}
+                  className="h-4 w-4 accent-emerald-600"
+                />
+                <span>Acepto participar libre y voluntariamente bajo las garantías de confidencialidad de la NOM-035.</span>
+              </label>
+
+              <div className="flex justify-between pt-2">
+                <button onClick={() => setPaso(1)} className="text-xs text-slate-600">Atrás</button>
+                <button
+                  disabled={!aceptoAviso}
+                  onClick={() => setPaso(3)}
+                  className={`text-xs px-4 py-2 rounded font-semibold ${aceptoAviso ? "bg-emerald-600 text-white" : "bg-slate-200 text-slate-400 cursor-not-allowed"}`}
+                >
+                  Continuar a Ficha Demográfica
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* PASO 3: FICHA GUÍA V */}
+          {paso === 3 && (
+            <div className="bg-white p-6 sm:p-8 rounded-lg border border-slate-200 shadow-xs space-y-4">
+              <h2 className="text-base font-bold text-slate-900">Ficha Sociodemográfica del Trabajador (Guía V)</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                <div>
+                  <label className="block text-slate-700 font-medium">Género:</label>
+                  <select
+                    value={fichaV.genero}
+                    onChange={(e) => setFichaV({ ...fichaV, genero: e.target.value })}
+                    className="w-full border rounded p-1.5 mt-1"
+                  >
+                    <option value="M">Masculino</option>
+                    <option value="F">Femenino</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-slate-700 font-medium">Rango de Edad:</label>
+                  <select
+                    value={fichaV.rangoEdad}
+                    onChange={(e) => setFichaV({ ...fichaV, rangoEdad: e.target.value })}
+                    className="w-full border rounded p-1.5 mt-1"
+                  >
+                    <option value="20-29">20 a 29 años</option>
+                    <option value="30-39">30 a 39 años</option>
+                    <option value="40-49">40 a 49 años</option>
+                    <option value="50-MAS">50 o más</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-slate-700 font-medium">Departamento / Área:</label>
+                  <input
+                    type="text"
+                    value={fichaV.departamento}
+                    onChange={(e) => setFichaV({ ...fichaV, departamento: e.target.value })}
+                    className="w-full border rounded p-1.5 mt-1"
+                  />
+                </div>
+                <div>
+                  <label className="block text-slate-700 font-medium">Puesto:</label>
+                  <input
+                    type="text"
+                    value={fichaV.puesto}
+                    onChange={(e) => setFichaV({ ...fichaV, puesto: e.target.value })}
+                    className="w-full border rounded p-1.5 mt-1"
+                  />
+                </div>
+              </div>
+
+              <div className="flex justify-between pt-4 border-t">
+                <button onClick={() => setPaso(2)} className="text-xs text-slate-600">Atrás</button>
+                <button onClick={() => setPaso(4)} className="text-xs bg-emerald-600 text-white font-semibold px-4 py-2 rounded">
+                  Avanzar a Guía I (ATS)
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* PASO 4: GUÍA I ATS */}
+          {paso === 4 && (
+            <div className="bg-white p-6 sm:p-8 rounded-lg border border-slate-200 shadow-xs space-y-4">
+              <h2 className="text-base font-bold text-slate-900">Guía I: Acontecimientos Traumáticos Severos</h2>
+              <p className="text-xs text-slate-600">
+                ¿Ha presenciado o sufrido alguna vez durante su trabajo accidentes graves, asaltos con violencia o amenazas directas contra su vida?
+              </p>
+
+              <div className="space-y-2 text-xs">
+                {[
+                  { k: "s1_1", t: "¿Ha presenciado o sufrido accidentes graves con riesgo de muerte o mutilación?" },
+                  { k: "s1_2", t: "¿Ha sufrido asaltos con violencia o uso de armas dentro de su trabajo?" },
+                  { k: "s1_3", t: "¿Ha sufrido privación de la libertad o amenazas directas contra su vida?" }
+                ].map(item => (
+                  <div key={item.k} className="p-3 bg-slate-50 border rounded flex justify-between items-center">
+                    <span className="pr-2">{item.t}</span>
+                    <div className="flex gap-2">
+                      <button
+                        type="button"
+                        onClick={() => setRespI({ ...respI, [item.k]: true })}
+                        className={`px-3 py-1 rounded font-bold text-xs ${respI[item.k] ? "bg-red-600 text-white" : "bg-white border text-slate-700"}`}
+                      >
+                        SÍ
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setRespI({ ...respI, [item.k]: false })}
+                        className={`px-3 py-1 rounded font-bold text-xs ${!respI[item.k] ? "bg-slate-700 text-white" : "bg-white border text-slate-700"}`}
+                      >
+                        NO
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="flex justify-between pt-4 border-t">
+                <button onClick={() => setPaso(3)} className="text-xs text-slate-600">Atrás</button>
+                <button onClick={() => setPaso(5)} className="text-xs bg-emerald-600 text-white font-semibold px-4 py-2 rounded">
+                  Avanzar al Cuestionario Principal ({centroSel.tipoGuia})
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* PASO 5: CUESTIONARIO LIKERT (CON SCROLL TOP EN CADA BLOQUE) */}
+          {paso === 5 && (
+            <div className="bg-white p-6 sm:p-8 rounded-lg border border-slate-200 shadow-xs space-y-5">
+              <div className="flex justify-between items-center border-b pb-3">
+                <h2 className="text-sm font-bold text-slate-900">
+                  {centroSel.tipoGuia} · Bloque {bloqueActual} de {totalBloques}
+                </h2>
+                <span className="text-xs text-slate-500 font-mono">
+                  Respondidos: {Object.keys(respLikert).length} / {totalItems}
+                </span>
+              </div>
+
+              <div className="space-y-4">
+                {itemsEnBloque.map(([numStr, texto]) => {
+                  const num = parseInt(numStr);
+                  const sel = respLikert[num];
+
+                  return (
+                    <div key={num} className="p-3.5 bg-slate-50 border rounded-lg space-y-2">
+                      <p className="text-xs font-semibold text-slate-800">
+                        <span className="font-mono text-slate-400 mr-1.5">#{num}</span> {texto}
+                      </p>
+                      <div className="grid grid-cols-2 sm:grid-cols-5 gap-1.5 pt-1">
+                        {LIKERT_OPCIONES.map(op => (
+                          <button
+                            key={op.val}
+                            type="button"
+                            onClick={() => setRespLikert({ ...respLikert, [num]: op.val })}
+                            className={`py-1.5 text-xs rounded border text-center transition font-medium ${
+                              sel === op.val
+                                ? "bg-emerald-600 text-white border-emerald-600 font-bold"
+                                : "bg-white text-slate-700 hover:bg-slate-100"
+                            }`}
+                          >
+                            {op.text}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              <div className="flex justify-between items-center pt-4 border-t">
+                <button
+                  onClick={() => {
+                    if (bloqueActual > 1) setBloqueActual(bloqueActual - 1);
+                    else setPaso(4);
+                  }}
+                  className="text-xs text-slate-600"
+                >
+                  {bloqueActual > 1 ? "Bloque Anterior" : "Volver a Guía I"}
+                </button>
+
+                {bloqueActual < totalBloques ? (
+                  <button
+                    onClick={() => setBloqueActual(bloqueActual + 1)}
+                    className="text-xs bg-slate-900 text-white font-semibold px-4 py-2 rounded"
+                  >
+                    Siguiente Bloque
+                  </button>
+                ) : (
+                  <button
+                    onClick={handleTerminar}
+                    className="text-xs bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-5 py-2.5 rounded"
+                  >
+                    Finalizar y Enviar Evaluación
+                  </button>
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* PASO 6: FINAL */}
+          {paso === 6 && (
+            <div className="bg-white p-8 rounded-lg border border-slate-200 shadow-xs text-center space-y-4">
+              <div className="w-12 h-12 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center mx-auto text-xl font-bold">
+                ✓
+              </div>
+              <h2 className="text-xl font-bold text-slate-900">¡Evaluación Completada con Éxito!</h2>
+              <p className="text-xs text-slate-600 max-w-md mx-auto">
+                Sus respuestas han sido procesadas de forma estrictamente confidencial bajo la NOM-035-STPS-2018.
+              </p>
+              <div className="p-3 bg-slate-50 border rounded max-w-xs mx-auto text-xs">
+                <span className="text-slate-500 block text-[11px]">Folio de Comprobante:</span>
+                <span className="font-mono font-bold text-sm text-slate-900">{folioFinal}</span>
+              </div>
+              <button
+                onClick={() => { setPaso(1); setRespLikert({}); setBloqueActual(1); }}
+                className="text-xs bg-slate-900 text-white px-4 py-2 rounded"
+              >
+                Iniciar Otra Aplicación
+              </button>
+            </div>
+          )}
+        </div>
+      );
+    }
+
+    // ========================================================================
+    // 7. MÓDULO BUZÓN CONFIDENCIAL (NUMERAL 8.1 INCISO B)
+    // ========================================================================
+    function VistaBuzon({ empresas, centros, quejas, onRegistrarQueja }) {
+      const [folioGenerado, setFolioGenerado] = useState("");
+      const [tipo, setTipo] = useState("VIOLENCIA_LABORAL");
+      const [area, setArea] = useState("");
+      const [desc, setDesc] = useState("");
+
+      const handleEnviar = (e) => {
+        e.preventDefault();
+        const folio = `FOL-QJ-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}-BZ`;
+        const q = {
+          id: `qj-${Date.now()}`,
+          empresaId: empresas[0].id,
+          folio,
+          fecha: new Date().toISOString().split("T")[0],
+          tipo,
+          area,
+          desc,
+          estatus: "RECIBIDA",
+          accion: "Registrada en el buzón confidencial para investigación por el Comité."
+        };
+        onRegistrarQueja(q);
+        setFolioGenerado(folio);
+        setArea("");
+        setDesc("");
+      };
+
+      return (
+        <div className="max-w-3xl mx-auto space-y-6">
+          <div className="bg-white p-6 rounded-lg border border-slate-200 shadow-xs space-y-4">
+            <h2 className="text-base font-bold text-slate-900">Buzón Confidencial de Quejas y Violencia Laboral</h2>
+            <p className="text-xs text-slate-500">
+              Mecanismo seguro bajo el numeral 8.1 inciso b) para reportar prácticas opuestas al entorno favorable.
+            </p>
+
+            {folioGenerado ? (
+              <div className="p-4 bg-emerald-50 border border-emerald-200 rounded text-center space-y-2 text-xs">
+                <span className="font-bold text-emerald-800 text-sm block">¡Reporte Enviado con Cifrado Anónimo!</span>
+                <span className="text-slate-600 block">Conserve su folio para consultar el seguimiento:</span>
+                <span className="font-mono font-bold bg-white px-3 py-1 rounded border text-sm">{folioGenerado}</span>
+                <button onClick={() => setFolioGenerado("")} className="block mx-auto text-emerald-700 underline pt-2">
+                  Enviar otro reporte
+                </button>
+              </div>
+            ) : (
+              <form onSubmit={handleEnviar} className="space-y-3 text-xs">
+                <div>
+                  <label className="block text-slate-700 font-medium">Tipo de Conducta:</label>
+                  <select
+                    value={tipo}
+                    onChange={(e) => setTipo(e.target.value)}
+                    className="w-full border rounded p-1.5 mt-1"
+                  >
+                    <option value="VIOLENCIA_LABORAL">Violencia Laboral (Agresión física, verbal o psicológica)</option>
+                    <option value="HOSTIGAMIENTO">Hostigamiento o Acoso Laboral</option>
+                    <option value="PRACTICA_OPUESTA">Práctica Opuesta al Entorno Organizacional</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-slate-700 font-medium">Área o Turno donde ocurrieron los hechos:</label>
+                  <input
+                    required
+                    type="text"
+                    value={area}
+                    onChange={(e) => setArea(e.target.value)}
+                    placeholder="Ej. Línea 2 Ensamble, Turno Nocturno"
+                    className="w-full border rounded p-1.5 mt-1"
+                  />
+                </div>
+                <div>
+                  <label className="block text-slate-700 font-medium">Descripción de los hechos:</label>
+                  <textarea
+                    required
+                    rows="3"
+                    value={desc}
+                    onChange={(e) => setDesc(e.target.value)}
+                    placeholder="Describa la situación sin proporcionar datos que vulneren su anonimato..."
+                    className="w-full border rounded p-1.5 mt-1"
+                  />
+                </div>
+                <button type="submit" className="bg-amber-600 hover:bg-amber-700 text-white font-semibold px-4 py-2 rounded">
+                  Enviar Reporte Anónimo
+                </button>
+              </form>
+            )}
+          </div>
+        </div>
+      );
+    }
+
+    // ========================================================================
+    // 8. MÓDULO REPORTE NORMATIVO OFICIAL (NUMERAL 7.7 STPS)
+    // ========================================================================
+    function VistaReporteOficial77({ empresa, centro, centros, setCentroId, evaluaciones, evaluador, setEvaluador }) {
+      const canalizados = evaluaciones.filter(e => e.atsClinico).length;
+      const totalScore = evaluaciones.reduce((sum, e) => sum + e.scoreTotal, 0);
+      const promedio = evaluaciones.length > 0 ? Math.round((totalScore / evaluaciones.length) * 10) / 10 : 0;
+      const nivelGlobal = centro.tipoGuia === "GUIA_II" ? clasificarTotalGuiaII(promedio) : clasificarTotalGuiaIII(promedio);
+
+      return (
+        <div className="max-w-4xl mx-auto space-y-6">
+          <div className="bg-white p-4 rounded-lg border shadow-xs flex justify-between items-center no-print">
+            <div>
+              <h2 className="text-sm font-bold text-slate-900">Emisor de Informe Normativo (Numeral 7.7)</h2>
+              <p className="text-xs text-slate-500">Documento membretado para presentación ante inspectores de la STPS.</p>
+            </div>
+            <div className="flex gap-2">
+              <select
+                value={centro.id}
+                onChange={(e) => setCentroId(e.target.value)}
+                className="text-xs border rounded px-2 py-1"
+              >
+                {centros.map(c => <option key={c.id} value={c.id}>{c.nombreSede}</option>)}
+              </select>
+              <button
+                onClick={() => window.print()}
+                className="bg-slate-900 text-white text-xs px-4 py-1.5 rounded font-bold"
+              >
+                Imprimir / PDF
+              </button>
+            </div>
+          </div>
+
+          {/* INFORME IMPRIMIBLE */}
+          <div className="bg-white p-8 sm:p-12 rounded-lg border shadow-sm space-y-6 text-xs print-full">
+            <div className="border-b-2 border-slate-900 pb-4">
+              <span className="font-mono font-bold text-[10px] text-slate-500 uppercase">
+                ESTADOS UNIDOS MEXICANOS · SECRETARÍA DEL TRABAJO Y PREVISIÓN SOCIAL
+              </span>
+              <h1 className="text-base font-extrabold text-slate-900 mt-1">
+                INFORME DE EVALUACIÓN DE FACTORES DE RIESGO PSICOSOCIAL Y ENTORNO ORGANIZACIONAL
+              </h1>
+              <span className="text-[11px] text-slate-600 block">Cumplimiento del Numeral 7.7 de la Norma Oficial Mexicana NOM-035-STPS-2018</span>
+            </div>
+
+            <section className="space-y-2">
+              <h3 className="font-bold bg-slate-100 p-1.5 border-l-4 border-slate-900 uppercase">
+                1. Datos del Centro de Trabajo (Numeral 7.7 incisos a y b)
+              </h3>
+              <div className="grid grid-cols-2 gap-2 text-[11px]">
+                <div>Razón Social: <strong>{empresa.razonSocial}</strong></div>
+                <div>R.F.C.: <strong>{empresa.rfc}</strong></div>
+                <div>Centro Evaluado: <strong>{centro.nombreSede}</strong></div>
+                <div>Plantilla Total: <strong>{centro.plantillaTotal} trabajadores</strong></div>
+                <div className="col-span-2">Actividad Principal: {empresa.actividadPrincipal}</div>
+              </div>
+            </section>
+
+            <section className="space-y-2">
+              <h3 className="font-bold bg-slate-100 p-1.5 border-l-4 border-slate-900 uppercase">
+                2. Método Psicométrico y Representatividad (Numeral 7.7 incisos c y d)
+              </h3>
+              <p className="text-[11px] leading-relaxed">
+                Se aplicó la <strong>{centro.tipoGuia} oficial</strong> junto con la Guía de Referencia I (Acontecimientos Traumáticos Severos). Cuestionarios evaluados: <strong>{evaluaciones.length}</strong> sobre una meta muestral de <strong>{centro.muestraCalculada}</strong>.
+              </p>
+            </section>
+
+            <section className="space-y-2">
+              <h3 className="font-bold bg-slate-100 p-1.5 border-l-4 border-slate-900 uppercase">
+                3. Resultados Consolidados (Numeral 7.7 inciso e)
+              </h3>
+              <div className="p-3 border rounded flex justify-between items-center" style={{ borderColor: ESCALA_COLORES[nivelGlobal].color }}>
+                <div>
+                  <span className="text-slate-600 block">Puntaje Promedio General:</span>
+                  <span className="text-xl font-bold">{promedio} puntos</span>
+                </div>
+                <span className={`text-xs font-bold px-3 py-1 rounded border ${ESCALA_COLORES[nivelGlobal].badge}`}>
+                  NIVEL DE RIESGO: {nivelGlobal}
+                </span>
+              </div>
+              <p className="text-[11px] text-slate-700">
+                Trabajadores canalizados a valoración médica clínica (Guía I ATS): <strong>{canalizados}</strong>.
+              </p>
+            </section>
+
+            <section className="space-y-2">
+              <h3 className="font-bold bg-slate-100 p-1.5 border-l-4 border-slate-900 uppercase">
+                4. Conclusiones y Medidas de Intervención por Niveles (8.4 y 8.5)
+              </h3>
+              <div className="space-y-1.5 text-[11px]">
+                <div className="p-2 bg-slate-50 border rounded">
+                  <strong>Nivel 1 (Organizacional):</strong> Actualizar política de prevención y regular tiempos de descanso y desconexión digital.
+                </div>
+                <div className="p-2 bg-slate-50 border rounded">
+                  <strong>Nivel 2 (Grupal):</strong> Talleres de sensibilización sobre liderazgo positivo y erradicación de violencia laboral.
+                </div>
+                <div className="p-2 bg-slate-50 border rounded">
+                  <strong>Nivel 3 (Individual):</strong> Canalización médica y psicológica confidencial al IMSS de colaboradores con afectación severa.
+                </div>
+              </div>
+            </section>
+
+            <section className="space-y-4 pt-4 border-t">
+              <h3 className="font-bold uppercase">5. Datos del Evaluador Profesional (Numeral 7.7 inciso g)</h3>
+              <div className="text-[11px] space-y-0.5">
+                <div>Nombre: <strong>{evaluador.nombre}</strong></div>
+                <div>Cédula Profesional: <strong>{evaluador.cedula}</strong></div>
+                <div>Especialidad: {evaluador.profesion}</div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-6 pt-6 text-center text-[10px]">
+                <div className="border-t pt-2">
+                  <strong>{evaluador.nombre}</strong>
+                  <span className="block text-slate-500">Céd. {evaluador.cedula} · Consultor SST</span>
+                </div>
+                <div className="border-t pt-2">
+                  <strong>{empresa.contactoNombre}</strong>
+                  <span className="block text-slate-500">Representante Legal · {empresa.razonSocial}</span>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      );
+    }
+
+    // Renderizado en el elemento raíz
+    ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+  </script>
+</body>
 </html>
